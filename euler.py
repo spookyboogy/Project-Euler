@@ -1239,13 +1239,10 @@ def thirtysix():
     leading zeros.)
     """
 
-
-
     ten_pals = [n for n in range(1, int(1E6)) if is_palindrome(str(n))]
     return sum([n for n in ten_pals if is_palindrome(bin(n)[2:])])
 
 
-print(thirtysix())
 
 
 
