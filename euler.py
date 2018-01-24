@@ -1161,6 +1161,25 @@ def thirtyfour():
 	return S
 
 
+def permute(n, indent=0):
+
+	"""
+	n -> string (intended to represent an integer)
+
+	Returns all distinct permutations of n
+	"""
+
+	perms = []
+
+	if len(n) <= 1:
+		return n
+	else:
+		for i in range(len(n)):
+			i_perms = permute(n[:i] + n[i + 1:], indent + 2)
+			perms += [n[i] + perm for perm in i_perms]
+		return list(set(perms))
+
+
 def thirtyfive():
 
 	"""
@@ -1173,10 +1192,35 @@ def thirtyfive():
 	How many circular primes are there below one million?
 	"""
 
-	pass
+	primes = ['2'] + [str(n) for n in range(3, int(1E6), 2) if is_prime(n)]
+	circles = []
+
+	for prime in primes:
+		if len(prime) == 1:
+			circles += [prime]
+		else:
+			rotations = []
+			rotation = ''.join(i for i in prime)
+			for i in range(len(prime) - 1):
+				rotation = rotation[1:] + rotation[0]
+				rotations += [rotation]
+			if sum([int(i in primes) for i in rotations]) == len(rotations):
+				circles += [prime]
+	return circles
 
 
+def thirtysix():
 
+	"""
+	The decimal number, 585 = 10010010012 (binary), is palindromic in both
+	bases.
+
+	Find the sum of all numbers, less than one million, which are palindromic
+	in base 10 and base 2.
+
+	(Please note that the palindromic number, in either base, may not include
+	leading zeros.)
+	"""
 
 
 
