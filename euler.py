@@ -120,7 +120,8 @@ def five():
         i += 1
         n = n0 * i
 
-        happyflag = False
+        happyflag = False #should be outside of the while loop, I think
+        				  #can condense found and happyflag into one flag
 
         for d in divisors:
             if n//d != n/d:
@@ -1109,7 +1110,7 @@ def thirtythree():
 				return True
 
 	def lcd(num, denom):
-		"returns lcd of num denom, assuming num < denom"
+		"returns lcd of num/denom, assuming num < denom"
 
 		x = max([i for i in range(2, denom+1) if [denom % i, num % i] == [0, 0]])
 		return denom/x
@@ -1134,12 +1135,52 @@ def thirtythree():
 	for i in box:
 		numnum *= i[0]
 		denomnom *= i[1]
-
 	answer = lcd(numnum, denomnom)
+
 	print(answer)
 	return answer
 
 
-thirtythree()
+def thirtyfour():
+
+	"""
+	145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+
+	Find the sum of all numbers which are equal to the sum of the factorial
+	of their digits.
+
+	Note: as 1! = 1 and 2! = 2 are not sums they are not included.
+	"""
+
+	S = 0
+	for n in range(145, int(1E5)):
+		ns = [int(i) for i in str(n)]
+		sn = sum([factorial(i) for i in ns])
+		if sn == n:
+			S += n
+	return S
+
+
+def thirtyfive():
+
+	"""
+	The number, 197, is called a circular prime because all rotations of the
+	digits: 197, 971, and 719, are themselves prime.
+
+	There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37,
+	71, 73, 79, and 97.
+
+	How many circular primes are there below one million?
+	"""
+
+	pass
+
+
+
+
+
+
+
+
 
 
