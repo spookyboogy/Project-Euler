@@ -75,6 +75,8 @@ def three(n):
     return prime_factor
 
 
+
+
 def four():
 
     """
@@ -90,9 +92,9 @@ def four():
             return False
         else:
             for i in range((len(n)//2)):
-                if not n[i] == n[len(n) - 1 - i]:
+                if n[i] != n[len(n) - 1 - i]:
                     return False
-        return True
+            return True
 
     palindromes = []
     for i in range(100, 1000):
@@ -121,7 +123,7 @@ def five():
         n = n0 * i
 
         happyflag = False #should be outside of the while loop, I think
-        				  #can condense found and happyflag into one flag
+                          #can condense found and happyflag into one flag
 
         for d in divisors:
             if n//d != n/d:
@@ -1032,38 +1034,38 @@ def thirtytwo():
     """
 
     def list_divisors(n):
-    	"only returns the kind of divisors we're looking for here"
+        "only returns the kind of divisors we're looking for here"
 
-    	divpairs = []
-    	for i in range(2, floor(sqrt(n)) + 1):
-    		if norepeats(i) and n % i == 0:
-    			j = n // i
-    			if i != j and norepeats(j):
-    				divpairs += [(i, j)]
-    	return divpairs
+        divpairs = []
+        for i in range(2, floor(sqrt(n)) + 1):
+            if norepeats(i) and n % i == 0:
+                j = n // i
+                if i != j and norepeats(j):
+                    divpairs += [(i, j)]
+        return divpairs
 
     def norepeats(n):
-    	"helper function, not sure if it's cost efficient"
+        "helper function, not sure if it's cost efficient"
 
-    	n = str(n)
-    	if '0' in n:
-    		return False
-    	for i in n:
-    		if n.count(i) > 1:
-    			return False
-    	return True
+        n = str(n)
+        if '0' in n:
+            return False
+        for i in n:
+            if n.count(i) > 1:
+                return False
+        return True
 
     def ispan(n):
-    	"a la primitive"
+        "a la primitive"
 
-    	n = str(n)
-    	if len(n) != 9:
-    		return False
-    	else:
-    		for i in n:
-    			if n.count(i) > 1:
-    				return False
-    	return True
+        n = str(n)
+        if len(n) != 9:
+            return False
+        else:
+            for i in n:
+                if n.count(i) > 1:
+                    return False
+        return True
 
 
     pan_products = []
@@ -1072,157 +1074,178 @@ def thirtytwo():
     n = 1234 #let's start here because I can't deduce a better starting point
 
     while mmp_peak_len <= 10:
-    	n += 1
-    	if norepeats(n):
-    		divs = list_divisors(n)
-    		for div in divs:
-    			a, b = div[0], div[1]
-    			mmp = str(div[0]) + str(div[1]) + str(n)
-    			if len(mmp) > mmp_peak_len:
-    				mmp_peak_len = len(mmp)
-    			if ispan(mmp):
-    				pan_products += [n]
+        n += 1
+        if norepeats(n):
+            divs = list_divisors(n)
+            for div in divs:
+                a, b = div[0], div[1]
+                mmp = str(div[0]) + str(div[1]) + str(n)
+                if len(mmp) > mmp_peak_len:
+                    mmp_peak_len = len(mmp)
+                if ispan(mmp):
+                    pan_products += [n]
     return sum(set(pan_products))
 
 
 def thirtythree():
 
-	"""
-	The fraction 49/98 is a curious fraction, as an inexperienced
-	mathematician in attempting to simplify it may incorrectly believe that
-	49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+    """
+    The fraction 49/98 is a curious fraction, as an inexperienced
+    mathematician in attempting to simplify it may incorrectly believe that
+    49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
 
-	We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+    We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
 
-	There are exactly four non-trivial examples of this type of fraction,
-	less than one in value, and containing two digits in the numerator and
-	denominator.
+    There are exactly four non-trivial examples of this type of fraction,
+    less than one in value, and containing two digits in the numerator and
+    denominator.
 
-	If the product of these four fractions is given in its lowest common
-	terms, find the value of the denominator.
-	"""
+    If the product of these four fractions is given in its lowest common
+    terms, find the value of the denominator.
+    """
 
-	def isreducible(num, denom):
-		"is num/denom reducible, assuming num < denom, inefficient af"
+    def isreducible(num, denom):
+        "is num/denom reducible, assuming num < denom, inefficient af"
 
-		for i in range(2, denom):
-			if num % i == 0 and denom % i == 0:
-				return True
+        for i in range(2, denom):
+            if num % i == 0 and denom % i == 0:
+                return True
 
-	def lcd(num, denom):
-		"returns lcd of num/denom, assuming num < denom"
+    def lcd(num, denom):
+        "returns lcd of num/denom, assuming num < denom"
 
-		x = max([i for i in range(2, denom+1) if [denom % i, num % i] == [0, 0]])
-		return denom/x
+        x = max([i for i in range(2, denom+1) if [denom % i, num % i] == [0, 0]])
+        return denom/x
 
 
-	box = []
+    box = []
 
-	for denom in range(99, 11, -1):
-		for num in range(11, denom):
-			if isreducible(num, denom):
-				n, d = str(num), str(denom)
-				if (n + d).count('0') == 0:
-					for i in n:
-						if i in d:
-							n_faux = n[n.index(i) - 1]
-							d_faux = d[d.index(i) - 1]
-							erreur = int(n_faux) / int(d_faux)
-							if erreur == num/denom:
-								box += [(num, denom)]
+    for denom in range(99, 11, -1):
+        for num in range(11, denom):
+            if isreducible(num, denom):
+                n, d = str(num), str(denom)
+                if (n + d).count('0') == 0:
+                    for i in n:
+                        if i in d:
+                            n_faux = n[n.index(i) - 1]
+                            d_faux = d[d.index(i) - 1]
+                            erreur = int(n_faux) / int(d_faux)
+                            if erreur == num/denom:
+                                box += [(num, denom)]
 
-	numnum, denomnom = 1, 1
-	for i in box:
-		numnum *= i[0]
-		denomnom *= i[1]
-	answer = lcd(numnum, denomnom)
+    numnum, denomnom = 1, 1
+    for i in box:
+        numnum *= i[0]
+        denomnom *= i[1]
+    answer = lcd(numnum, denomnom)
 
-	print(answer)
-	return answer
+    print(answer)
+    return answer
 
 
 def thirtyfour():
 
-	"""
-	145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+    """
+    145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
 
-	Find the sum of all numbers which are equal to the sum of the factorial
-	of their digits.
+    Find the sum of all numbers which are equal to the sum of the factorial
+    of their digits.
 
-	Note: as 1! = 1 and 2! = 2 are not sums they are not included.
-	"""
+    Note: as 1! = 1 and 2! = 2 are not sums they are not included.
+    """
 
-	S = 0
-	for n in range(145, int(1E5)):
-		ns = [int(i) for i in str(n)]
-		sn = sum([factorial(i) for i in ns])
-		if sn == n:
-			S += n
-	return S
+    S = 0
+    for n in range(145, int(1E5)):
+        ns = [int(i) for i in str(n)]
+        sn = sum([factorial(i) for i in ns])
+        if sn == n:
+            S += n
+    return S
 
 
 def permute(n, indent=0):
 
-	"""
-	n -> string (intended to represent an integer)
+    """
+    n -> string (intended to represent an integer)
 
-	Returns all distinct permutations of n
-	"""
+    Returns all distinct permutations of n
+    """
 
-	perms = []
+    perms = []
 
-	if len(n) <= 1:
-		return n
-	else:
-		for i in range(len(n)):
-			i_perms = permute(n[:i] + n[i + 1:], indent + 2)
-			perms += [n[i] + perm for perm in i_perms]
-		return list(set(perms))
+    if len(n) <= 1:
+        return n
+    else:
+        for i in range(len(n)):
+            i_perms = permute(n[:i] + n[i + 1:], indent + 2)
+            perms += [n[i] + perm for perm in i_perms]
+        return list(set(perms))
 
 
 def thirtyfive():
 
-	"""
-	The number, 197, is called a circular prime because all rotations of the
-	digits: 197, 971, and 719, are themselves prime.
+    """
+    The number, 197, is called a circular prime because all rotations of the
+    digits: 197, 971, and 719, are themselves prime.
 
-	There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37,
-	71, 73, 79, and 97.
+    There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37,
+    71, 73, 79, and 97.
 
-	How many circular primes are there below one million?
-	"""
+    How many circular primes are there below one million?
+    """
 
-	primes = ['2'] + [str(n) for n in range(3, int(1E6), 2) if is_prime(n)]
-	circles = []
+    primes = ['2'] + [str(n) for n in range(3, int(1E6), 2) if is_prime(n)]
+    circles = []
 
-	for prime in primes:
-		if len(prime) == 1:
-			circles += [prime]
-		else:
-			rotations = []
-			rotation = ''.join(i for i in prime)
-			for i in range(len(prime) - 1):
-				rotation = rotation[1:] + rotation[0]
-				rotations += [rotation]
-			if sum([int(i in primes) for i in rotations]) == len(rotations):
-				circles += [prime]
-	return circles
+    for prime in primes:
+        if len(prime) == 1:
+            circles += [prime]
+        else:
+            rotations = []
+            rotation = ''.join(i for i in prime)
+            for i in range(len(prime) - 1):
+                rotation = rotation[1:] + rotation[0]
+                rotations += [rotation]
+            if sum([int(i in primes) for i in rotations]) == len(rotations):
+                circles += [prime]
+    return circles
+
+
+def is_palindrome(n):
+
+    "n -> str(n)"
+
+    if len(n) == 1:
+        return True
+    elif len(n) == 2:
+        return n[0] == n[1]
+    else:
+        for i in range((len(n)//2)):
+            if n[i] != n[len(n) - 1 - i]:
+                return False
+    return True
 
 
 def thirtysix():
 
-	"""
-	The decimal number, 585 = 1001001001 (binary), is palindromic in both
-	bases.
+    """
+    The decimal number, 585 = 1001001001 (binary), is palindromic in both
+    bases.
 
-	Find the sum of all numbers, less than one million, which are palindromic
-	in base 10 and base 2.
+    Find the sum of all numbers, less than one million, which are palindromic
+    in base 10 and base 2.
 
-	(Please note that the palindromic number, in either base, may not include
-	leading zeros.)
-	"""
+    (Please note that the palindromic number, in either base, may not include
+    leading zeros.)
+    """
 
-	pass
+
+
+    ten_pals = [n for n in range(1, int(1E6)) if is_palindrome(str(n))]
+    return sum([n for n in ten_pals if is_palindrome(bin(n)[2:])])
+
+
+print(thirtysix())
 
 
 
