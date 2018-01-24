@@ -1043,6 +1043,7 @@ def thirtytwo():
 
     def norepeats(n):
     	"helper function, not sure if it's cost efficient"
+
     	n = str(n)
     	if '0' in n:
     		return False
@@ -1053,6 +1054,7 @@ def thirtytwo():
 
     def ispan(n):
     	"a la primitive"
+
     	n = str(n)
     	if len(n) != 9:
     		return False
@@ -1066,32 +1068,78 @@ def thirtytwo():
     pan_products = []
 
     mmp_peak_len = 0
-    n = 1200 #let's start here because I can't deduce a better starting point
+    n = 1234 #let's start here because I can't deduce a better starting point
 
     while mmp_peak_len <= 10:
-
+    	n += 1
     	if norepeats(n):
-
     		divs = list_divisors(n)
     		for div in divs:
-    			a = div[0]
-    			b = div[1]
-    			mmp = str(a) + str(b) + str(n)
+    			a, b = div[0], div[1]
+    			mmp = str(div[0]) + str(div[1]) + str(n)
     			if len(mmp) > mmp_peak_len:
     				mmp_peak_len = len(mmp)
     			if ispan(mmp):
-    				print('\tfound one?\n\ta = {}, b = {}'.format(a, b))
     				pan_products += [n]
-    	n += 1
-
     return sum(set(pan_products))
 
 
-print(thirtytwo())
+def thirtythree():
+
+	"""
+	The fraction 49/98 is a curious fraction, as an inexperienced
+	mathematician in attempting to simplify it may incorrectly believe that
+	49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+
+	We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+
+	There are exactly four non-trivial examples of this type of fraction,
+	less than one in value, and containing two digits in the numerator and
+	denominator.
+
+	If the product of these four fractions is given in its lowest common
+	terms, find the value of the denominator.
+	"""
+
+	def isreducible(num, denom):
+		"is num/denom reducible, assuming num < denom, inefficient af"
+
+		for i in range(2, denom):
+			if num % i == 0 and denom % i == 0:
+				return True
+
+	def lcd(num, denom):
+		"returns lcd of num denom, assuming num < denom"
+
+		x = max([i for i in range(2, denom+1) if [denom % i, num % i] == [0, 0]])
+		return denom/x
 
 
+	box = []
+
+	for denom in range(99, 11, -1):
+		for num in range(11, denom):
+			if isreducible(num, denom):
+				n, d = str(num), str(denom)
+				if (n + d).count('0') == 0:
+					for i in n:
+						if i in d:
+							n_faux = n[n.index(i) - 1]
+							d_faux = d[d.index(i) - 1]
+							erreur = int(n_faux) / int(d_faux)
+							if erreur == num/denom:
+								box += [(num, denom)]
+
+	numnum, denomnom = 1, 1
+	for i in box:
+		numnum *= i[0]
+		denomnom *= i[1]
+
+	answer = lcd(numnum, denomnom)
+	print(answer)
+	return answer
 
 
-
+thirtythree()
 
 
