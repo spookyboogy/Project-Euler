@@ -1306,7 +1306,29 @@ def thirtyeight():
     the concatenated product of an integer with (1,2, ... , n) where n > 1?
     """
 
-    pass
+    def ispan(n):
+        "a la primitive"
+
+        return set(n) == set('123456789') and len(n) == 9
+
+    cat_pans = []
+    n = 2
+
+    while len(str(n)) <= 4:
+
+        cat_max = range(1, ceil(9 / len(str(n))))
+        cat_arr = [list(cat_max[:i]) for i in range(1, len(cat_max) + 1)]
+
+        for cat in cat_arr:
+            ncat = ''.join(str(n * i) for i in cat)
+            if len(ncat) == 9:
+                if ispan(ncat):
+                    cat_pans += [ncat]
+        n += 1
+
+    return max(cat_pans)
+
+
 
 
 
