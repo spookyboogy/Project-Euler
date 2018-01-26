@@ -21,10 +21,12 @@ def is_prime(n):
 
     """Returns True if n is prime, False otherwise."""
 
-    if not is_odd(n):
+    if n == 2:
+        return True
+    elif not is_odd(n) or n <= 1:
         return False
 
-    for i in range(3, ceil(sqrt(abs(n))) + 1):
+    for i in range(2, ceil(sqrt(n)) + 1):
         if n//i == n/i:
             return False
 
@@ -1243,9 +1245,68 @@ def thirtysix():
     return sum([n for n in ten_pals if is_palindrome(bin(n)[2:])])
 
 
+def thirtyseven():
+
+    """
+    The number 3797 has an interesting property. Being prime itself, it is
+    possible to continuously remove digits from left to right, and remain
+    prime at each stage: 3797, 797, 97, and 7. Similarly we can work from
+    right to left: 3797, 379, 37, and 3.
+
+    Find the sum of the only eleven primes that are both truncatable from left
+    to right and right to left.
+
+    NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+    """
+
+    i, N = 0, 13
+    speshuls = []
+
+    while i < 11:
+        N += 2
+
+        if is_prime(N):
+
+            n = str(N)
+            left_truncs = [n[i:] for i in range(1, len(n))][::-1]
+            right_truncs = [n[:i] for i in range(1, len(n))]
+            truncs = [[left_truncs[i], right_truncs[i]] for i in range(len(n)-1)]
+
+            spesh = True
+            ii = 0
+            while ii < len(truncs):
+                if not is_prime(int(truncs[ii][0])):
+                    spesh = False
+                    break
+                elif not is_prime(int(truncs[ii][1])):
+                    spesh = False
+                    break
+                ii += 1
+            if spesh:
+                speshuls += [N]
+                i += 1
+
+    return sum(speshuls)
 
 
+def thirtyeight():
 
+    """
+    Take the number 192 and multiply it by each of 1, 2, and 3:
+
+    192 × 1 = 192, 192 × 2 = 384, 192 × 3 = 576
+    By concatenating each product we get the 1 to 9 pandigital, 192384576. We
+    will call 192384576 the concatenated product of 192 and (1,2,3)
+
+    The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4,
+    and 5, giving the pandigital, 918273645, which is the concatenated product
+    of 9 and (1,2,3,4,5).
+
+    What is the largest 1 to 9 pandigital 9-digit number that can be formed as
+    the concatenated product of an integer with (1,2, ... , n) where n > 1?
+    """
+
+    pass
 
 
 
