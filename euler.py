@@ -1329,7 +1329,49 @@ def thirtyeight():
     return max(cat_pans)
 
 
+def thirtynine():
 
+    """
+    If p is the perimeter of a right angle triangle with integral length
+    sides, {a,b,c}, there are exactly three solutions for p = 120:
+
+    {20,48,52}, {24,45,51}, {30,40,50}
+
+    For which value of p ≤ 1000, is the number of solutions maximised?
+
+    Solved in a very janky, brutish and inefficient manner
+    """
+
+    max_sols = [0, 0]
+    for p in range(4, 1000):
+        p_sols = 0
+        for a in range(1, p // 2):
+            for b in range(1, p // 2)[::-1]:
+                c = p - a - b
+                if c ** 2 == a ** 2 + b ** 2:
+                    p_sols += 1
+        if p_sols > max_sols[1]:
+            max_sols = [p, p_sols]
+    return max_sols
+
+
+def forty():
+
+    """
+    An irrational decimal fraction is created by concatenating the positive
+    integers:
+
+    0.123456789101112131415161718192021...
+
+    It can be seen that the 12th digit of the fractional part is 1.
+
+    If dn represents the nth digit of the fractional part, find the value of
+    the following expression.
+
+    d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
+    """
+
+    pass
 
 
 
