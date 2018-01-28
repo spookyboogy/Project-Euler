@@ -1413,10 +1413,31 @@ def fortytwo():
     example, the word value for SKY is 19 + 11 + 25 = 55 = t10. If the word
     value is a triangle number then we shall call the word a triangle word.
     
-    Uses "words.txt", provided by project euler
+    Uses "words.txt", provided by project euler, how many words are
+    triangle words?
     """
 
-    pass
+    try:
+        with open('words.txt') as f:
+            f = f.read().split(',')
+            words = [i.strip('\"') for i in f]
+    except:
+        print('Missing words.txt from projecteuler.net/problem=42')
+
+    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',\
+                'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',\
+                'W', 'X', 'Y', 'Z']
+
+    t_cap = 26 * len(max(words, key=len)) 
+    triangles = [.5 * i * (i + 1) for i in range(1, t_cap)]
+
+    t_word_count = 0
+    for word in words:
+        wordsworth = sum(alphabet.index(c)+1 for c in word)
+        t_word_count += int(wordsworth in triangles) 
+    return t_word_count
+ 
+print(fortytwo())
 
 
 
