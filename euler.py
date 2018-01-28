@@ -1390,9 +1390,16 @@ def fortyone():
     What is the largest n-digit pandigital prime that exists?
     """
 
-    n = 0
+    n = 9
+    while n > 1:
+        perms = permute(''.join(str(i) for i in range(1, n + 1)))
+        primperms = [i for i in perms if is_prime(int(i))]
+        if primperms:
+            return max(primperms)
+        else:
+            n -= 1
 
-
+print(fortyone())
 
 
 
