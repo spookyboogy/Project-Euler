@@ -1433,11 +1433,11 @@ def fortytwo():
 
     t_word_count = 0
     for word in words:
-        wordsworth = sum(alphabet.index(c)+1 for c in word)
+        wordsworth = sum(alphabet.index(c) + 1 for c in word)
         t_word_count += int(wordsworth in triangles) 
     return t_word_count
  
-print(fortytwo())
+
 
 
 
