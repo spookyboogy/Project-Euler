@@ -1371,7 +1371,27 @@ def forty():
     d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
     """
 
-    pass
+    d_arr = [1 * (10 ** i) for i in range(7)]
+    c = ''.join(str(i) for i in range(1, d_arr[-1] + 1))
+    d_factors = [c[i-1] for i in d_arr]
+
+    p = 1
+    for i in d_factors:
+        p *= int(i)
+    return p
+
+def fortyone():
+
+    """
+    We shall say that an n-digit number is pandigital if it makes use of all
+    the digits 1 to n exactly once. For example, 2143 is a 4-digit
+    pandigitaland is also prime.
+
+    What is the largest n-digit pandigital prime that exists?
+    """
+
+    n = 0
+
 
 
 
