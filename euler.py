@@ -1538,6 +1538,52 @@ def fortyfive():
     It can be verified that T285 = P165 = H143 = 40755.
 
     Find the next triangle number that is also pentagonal and hexagonal.
+
+    Personal note: The inverse hexagonal function is n = (sqrt(8x + 1) + 1)/ 4
+    """
+
+    def t(n):
+        "I should be a lambda"
+        return (n * (n + 1)) / 2
+
+    def inv_p(n):
+        "I should also be a lambda"
+        return (sqrt((24 * n) + 1) + 1) / 6
+
+    def inv_h(n):
+        "I should also be a lambda"
+        return (sqrt((8 * n) + 1) + 1) / 4
+
+    trouves = 0
+    n = 1
+    tn = t(n)
+
+    while trouves < 2:
+        n += 1
+        tn = t(n)
+        if inv_p(tn) % 1 == 0 and inv_h(tn) % 1 == 0:
+            trouves += 1
+            if trouves == 2:
+                return tn
+
+
+def fortysix():
+
+    """
+    It was proposed by Christian Goldbach that every odd composite number can
+    be written as the sum of a prime and twice a square.
+
+    9 = 7 + 2×12
+    15 = 7 + 2×22
+    21 = 3 + 2×32
+    25 = 7 + 2×32
+    27 = 19 + 2×22
+    33 = 31 + 2×12
+
+    It turns out that the conjecture was false.
+
+    What is the smallest odd composite that cannot be written as the sum of
+    a prime and twice a square?
     """
 
     pass
