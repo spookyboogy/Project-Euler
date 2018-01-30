@@ -1627,6 +1627,22 @@ def fortyseven():
     factors each. What is the first of these numbers?
     """
 
-    pass
+    n = 1000
+    conseq = 0
+    primes = []
+
+    while n < 10000:
+
+        factors = []
+        prime = True
+
+        for i in range(1, ceil(sqrt(n)) + 1):
+            if n % i == 0 and is_odd(i):
+                prime = False
+        if prime:
+            primes += [n]
+
+        n += 1
+
 
 
