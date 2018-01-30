@@ -1589,35 +1589,23 @@ def fortysix():
     primes = [2]
     yoku = True
 
-    while n < 20:
-        print('----\nn = {}'.format(n), end=', ')
+    while yoku:
         if is_prime(n):
-            print('prime')
             primes += [n]
         else:
-            print('composite')
             satis = False
             for i in primes[::-1]:
-
                 d = n - i
-
-                print('\ttesting prime # {}'.format(i))
-                print('\tn - p = d = {}'.format(d))
-
                 if d % 2 == 0:
-                    for s in range(int(ceil(.5 * d)))[::-1]:
-                        print('\t2* s^2 = 2* {}^2 = {}'.format(s, 2*(s**2)))
+                    for s in range(1, int(ceil(.5 * d)) + 1):
                         if 2 * (s ** 2) == d:
-
-                            print('\tsatisfied, s = {}'.format(s))
                             satis = True
-
+                            break
+                if satis:
+                    break
             if not satis:
-                yoku = False
                 return n
-            print('n = {} {}'.format(n, satis))
         n += 2
-    return n
 
 print(fortysix())
 
