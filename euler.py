@@ -13,8 +13,7 @@ def is_odd(n):
     """Returns True if n is odd, False otherwise."""
     if n//2 == n/2:
         return False
-    else:
-        return True
+    return True
 
 
 def is_prime(n):
@@ -1573,12 +1572,12 @@ def fortysix():
     It was proposed by Christian Goldbach that every odd composite number can
     be written as the sum of a prime and twice a square.
 
-    9 = 7 + 2×12
-    15 = 7 + 2×22
-    21 = 3 + 2×32
-    25 = 7 + 2×32
-    27 = 19 + 2×22
-    33 = 31 + 2×12
+    9 = 7 + 2×1^2
+    15 = 7 + 2×2^2
+    21 = 3 + 2×3^2
+    25 = 7 + 2×3^2
+    27 = 19 + 2×2^2
+    33 = 31 + 2×1^2
 
     It turns out that the conjecture was false.
 
@@ -1586,7 +1585,43 @@ def fortysix():
     a prime and twice a square?
     """
 
-    pass
+    n = 3
+    primes = [2]
+    yoku = True
+
+    while n < 20:
+        print('----\nn = {}'.format(n), end=', ')
+        if is_prime(n):
+            print('prime')
+            primes += [n]
+        else:
+            print('composite')
+            satis = False
+            for i in primes[::-1]:
+
+                d = n - i
+
+                print('\ttesting prime # {}'.format(i))
+                print('\tn - p = d = {}'.format(d))
+
+                if d % 2 == 0:
+                    for s in range(int(ceil(.5 * d)))[::-1]:
+                        print('\t2* s^2 = 2* {}^2 = {}'.format(s, 2*(s**2)))
+                        if 2 * (s ** 2) == d:
+
+                            print('\tsatisfied, s = {}'.format(s))
+                            satis = True
+
+            if not satis:
+                yoku = False
+                return n
+            print('n = {} {}'.format(n, satis))
+        n += 2
+    return n
+
+print(fortysix())
+
+
 
 
 
