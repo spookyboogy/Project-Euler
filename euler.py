@@ -1666,17 +1666,11 @@ def fortyseven():
     c_factors = []
 
     while n:
-
         factors = [i for i in primes if n % i == 0]
-
         if len(factors) == 4:
-
             yoku = True
-
             for i in range(len(c_factors))[::-1]:
-
                 n2, f2 = c_factors[i][0], c_factors[i][1]
-
                 if not distinct(n, factors, n2, f2):
                     yoku = False
                     c = c - i
