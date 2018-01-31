@@ -1635,7 +1635,8 @@ def fortyseven():
     def distinct(n1, f1, n2, f2):
 
         """
-        f1, f2 -> lists of equal length of prime factors of n1 and n2
+        f1, f2 -> lists of equal length of prime factors of n1 and n2,
+                  respectively
 
         Returns true if n1 and n2 have distinct prime factors
         """
