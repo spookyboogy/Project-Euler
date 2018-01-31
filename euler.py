@@ -1671,28 +1671,26 @@ def fortyseven():
         if len(factors) == 4:
 
             yoku = True
-            cut_here = 0
 
             for i in range(len(c_factors))[::-1]:
+
                 n2, f2 = c_factors[i][0], c_factors[i][1]
+
                 if not distinct(n, factors, n2, f2):
                     yoku = False
-                    cut_here = i
+                    c = c - i
+                    c_factors = c_factors[i + 1:]
                     break
             if yoku:
                 if c == 3:
                     return n - 3
                 c += 1
                 c_factors += [[n, factors]]
-            else:
-                c = c - cut_here
-                c_factors = c_factors[cut_here + 1:]
         else:
             c = 0
             c_factors = []
         n += 1
 
-print(fortyseven())
 
 def fortyeight():
 
@@ -1701,3 +1699,7 @@ def fortyeight():
 
     Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
     """
+
+    pass
+
+
