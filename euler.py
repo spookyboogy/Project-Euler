@@ -1625,24 +1625,79 @@ def fortyseven():
 
     Find the first four consecutive integers to have four distinct prime
     factors each. What is the first of these numbers?
+
+    Note: p and p^n are apparently distinct prime factors
+
+    This takes a couple of minutes to find the answer- really poorly
+    structured, inefficient, naive, etc...
     """
 
+    def distinct(n1, f1, n2, f2):
+
+        """
+        f1, f2 -> lists of equal length of prime factors of n1 and n2
+
+        Returns true if n1 and n2 have distinct prime factors
+        """
+
+        for i in range(len(f1)):
+            for j in range(len(f2)):
+                if f1[i] == f2[j]:
+                    f1_not = f1[:i] + f1[i+1:]
+                    f2_not = f2[:j] + f2[j+1:]
+                    n1d, n2d = n1, n2
+                    for ii in range(len(f1) - 1):
+                        n1d = n1d / f1_not[ii]
+                        n2d = n2d / f2_not[ii]
+                    if n1d == n2d:
+                        return False
+        return True
+
+
+    print('calcin proms mon...')
+    primes = [i for i in range(2, int(1E5)) if is_prime(i)]
+    # This is a really cheap way of simplifying the problem. Primality would
+    # have to be tested for in the main loop otherwise. A list of primes could
+    # still be gathered to expedite prime factorization.
+
     n = 1000
-    conseq = 0
-    primes = []
+    c = 0
+    c_factors = []
 
-    while n < 10000:
+    while n:
 
-        factors = []
-        prime = True
+        factors = [i for i in primes if n % i == 0]
 
-        for i in range(1, ceil(sqrt(n)) + 1):
-            if n % i == 0 and is_odd(i):
-                prime = False
-        if prime:
-            primes += [n]
+        if len(factors) == 4:
 
+            yoku = True
+            cut_here = 0
+
+            for i in range(len(c_factors))[::-1]:
+                n2, f2 = c_factors[i][0], c_factors[i][1]
+                if not distinct(n, factors, n2, f2):
+                    yoku = False
+                    cut_here = i
+                    break
+            if yoku:
+                if c == 3:
+                    return n - 3
+                c += 1
+                c_factors += [[n, factors]]
+            else:
+                c = c - cut_here
+                c_factors = c_factors[cut_here + 1:]
+        else:
+            c = 0
+            c_factors = []
         n += 1
 
+print(fortyseven())
 
+def fortyeight():
 
+    """
+    The series, 1^1 + 2^2 + 3^3 + ... + 1010 = 10405071317.
+
+    Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
+    """
