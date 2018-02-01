@@ -1695,6 +1695,83 @@ def fortyeight():
     Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
     """
 
+    return str(sum(i ** i for i in range(1, 1001)))[-10:]
+    #lol python
+
+
+def fortynine():
+
+    """
+    The arithmetic sequence, 1487, 4817, 8147, in which each of the terms
+    increases by 3330, is unusual in two ways: (i) each of the three terms are
+    prime, and, (ii) each of the 4-digit numbers are permutations of one
+    another.
+
+    There are no arithmetic sequences made up of three 1-, 2-, or 3-digit
+    primes, exhibiting this property, but there is one other 4-digit
+    increasing sequence.
+
+    What 12-digit number do you form by concatenating the three terms in this
+    sequence?
+
+    I have to say that my solution is very sloppy and lazy, but this isn't a
+    computationally expensive problem, so... cba
+    """
+
+    def equidistant(l):
+
+        """
+        l -> sorted list of integers or strings representing integers
+
+        Returns true if there are n2, n1, n0 in l such that n2 - n1 = n1 - n0.
+        """
+
+        for i in range(2, len(l))[::-1]:
+            n2 = l[i]
+            for j in range(1, i)[::-1]:
+                n1 = l[j]
+                for k in range(j):
+                    n0 = l[k]
+                    if int(n2) - int(n1) == int(n1) - int(n0):
+                        return [n0, n1, n2]
+        return False
+
+    primes = [str(i) for i in range(int(1E3), int(1E4)) if is_prime(i)]
+    s = 0
+
+    for p in primes:
+        perms = [perm for perm in permute(p) if perm[0] != '0' and perm != p]
+        perms.sort()
+        gewds = [int(perm in primes) for perm in perms]
+        if sum(gewds) >= 3:
+            n = [i for i in perms if gewds[perms.index(i)] == 1] + [p]
+            n.sort()
+            sol = equidistant(n)
+            if sol and p in sol:
+                s += 1
+                if s == 2:
+                    return ''.join(str(i) for i in sol)
+
+
+def fifty():
+
+    """
+    The prime 41, can be written as the sum of six consecutive primes:
+
+    41 = 2 + 3 + 5 + 7 + 11 + 13
+    This is the longest sum of consecutive primes that adds to a prime below
+    one-hundred.
+
+    The longest sum of consecutive primes below one-thousand that adds to a
+    prime, contains 21 terms, and is equal to 953.
+
+    Which prime, below one-million, can be written as the sum of the most
+    consecutive primes?
+    """
+
     pass
+
+
+
 
 
