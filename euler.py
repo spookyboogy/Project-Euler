@@ -1736,7 +1736,7 @@ def fortynine():
                         return [n0, n1, n2]
         return False
 
-    primes = [str(i) for i in range(int(1E3), int(1E4)) if is_prime(i)]
+    primes = [str(i) for i in range(int(1E3) + 1, int(1E4), 2) if is_prime(i)]
     s = 0
 
     for p in primes:
@@ -1752,13 +1752,13 @@ def fortynine():
                 if s == 2:
                     return ''.join(str(i) for i in sol)
 
-
 def fifty():
 
     """
     The prime 41, can be written as the sum of six consecutive primes:
 
-    41 = 2 + 3 + 5 + 7 + 11 + 13
+                    41 = 2 + 3 + 5 + 7 + 11 + 13
+
     This is the longest sum of consecutive primes that adds to a prime below
     one-hundred.
 
@@ -1769,7 +1769,13 @@ def fifty():
     consecutive primes?
     """
 
-    pass
+    primes = [2] + [i for i in range(3, int(1E6), 2) if is_prime(i)]
+
+    start = primes.index(953) + 1
+    for p in primes[start:]:
+        pass
+
+
 
 
 
