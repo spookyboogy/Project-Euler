@@ -1767,15 +1767,52 @@ def fifty():
 
     Which prime, below one-million, can be written as the sum of the most
     consecutive primes?
+
+    The algorithm I used to solve this is entirely inefficient, but it works.
     """
 
+    max_prime_sum = 21
+    max_prime = 953
     primes = [2] + [i for i in range(3, int(1E6), 2) if is_prime(i)]
 
     start = primes.index(953) + 1
-    for p in primes[start:]:
-        pass
+    for prime in primes[start:]:
+        for i in range(primes.index(prime)):
+            breakme = False
+            s = primes[i]
+            sum_length = 1
+            while s <= prime:
+                if s == prime:
+                    if sum_length > max_prime_sum:
+                        max_prime_sum = sum_length
+                        max_prime = prime
+                        breakme = True
+                        break
+                s += primes[i + sum_length]
+                sum_length += 1
+            if breakme:
+                break
+    return max_prime
 
 
+def fiftyone():
+
+    """
+    By replacing the 1st digit of the 2-digit number *3, it turns out that six
+    of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
+
+    By replacing the 3rd and 4th digits of 56**3 with the same digit, this
+    5-digit number is the first example having seven primes among the ten
+    generated numbers, yielding the family: 56003, 56113, 56333, 56443, 56663,
+    56773, and 56993. Consequently 56003, being the first member of this
+    family, is the smallest prime with this property.
+
+    Find the smallest prime which, by replacing part of the number (not
+    necessarily adjacent digits) with the same digit, is part of an eight
+    prime value family.
+    """
+
+    pass
 
 
 
